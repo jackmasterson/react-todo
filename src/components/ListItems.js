@@ -1,16 +1,15 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import Launch from './components/Launch';
-import './App.css';
+import ListItem from './ListItem';
 
-class App extends Component {
+class ListItems extends Component {
     render() {
-        return (
-            <Launch/>
-        );
+        return(
+            <ListItem/>
+        )
     }
 }
 
 export default connect(
     (state) => (state)
-)(App);
+)(ListItems);
