@@ -31,14 +31,16 @@ const crossedOff = (val) => ({type: CROSS_OFF_TO_DO, payload: val});
 const successfulSignOn = (val) => ({type: SUCCESSFUL_SIGN_ON, payload: val});
 const newUserFlow = (val) => ({type: NEW_USER_SIGN_ON, payload: val});
 
-export const toDoSelected = (val) => {
+export const toDoSelected = (val, todos) => {
+    console.log(val, todos);
     return (dispatch) => {
-        let selected = select(val);
+        let selected = select(val, todos);
         dispatch(selectionSubmitted(val));
     }
 }
 
 export const updateToDo = (val) => {
+    console.log('val is: ', val);
     return (dispatch) => {
         dispatch(toDoUpdated(val));
     }
@@ -50,6 +52,7 @@ export const addToDo = (val, totalTodos) => {
         let addition = add(val, todoList);
         dispatch(toDoSubmitted(val));
         dispatch(updateList(addition));
+        dispatch(selectionSubmitted(null));
     }
 }
 
@@ -57,14 +60,7 @@ export const addEdits = (val, edits, totalTodos) => {
     const todoList = totalTodos || initialTodos;
     return (dispatch) => {
         let update = updated(val, edits, todoList);
-        dispatch(toDoSubmitted(val));
         dispatch(updateList(update));
-    }
-}
-
-export const selectToDo = (val) => {
-    return (dispatch) => {
-        dispatch(selectionSubmitted(val));
     }
 }
 
@@ -78,6 +74,7 @@ export const deleteToDo = (val, totalTodos) => {
     return (dispatch) => {
         let deleting = deleteThis(val, totalTodos)
         dispatch(deleted(deleting));
+        dispatch(selectionSubmitted(null));
     }
 }
 

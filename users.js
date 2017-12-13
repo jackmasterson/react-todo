@@ -1,4 +1,4 @@
-module.exports = ((user, password, userExists) => {
+module.exports = ((info, userExists) => {
     const MongoClient = require('mongodb').MongoClient;
     const bcrypt = require('bcrypt');
     const dotenv = require('dotenv').config();
@@ -6,6 +6,8 @@ module.exports = ((user, password, userExists) => {
 
     MongoClient.connect(url, (err, db) => {
         let col = db.db('test').collection('userDatabase');
+        let user = info.user;
+        let password = info.password;
         col.findOne({user}, (err, item) => {
             if (!item) {
                 userExists(false);

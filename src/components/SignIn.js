@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {requestSignIn} from '../reducers/action-reducer';
+import Launch from './Launch';
 
 class SignIn extends Component {
     submit(newUser) {
         let un = document.getElementById('username').value;
         let pw = document.getElementById('password').value;
-        console.log(newUser);
         this.props.requestSignIn(un, pw, newUser);
     }
     render() {

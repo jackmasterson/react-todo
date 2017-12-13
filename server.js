@@ -24,17 +24,17 @@ io.on('connection', ((socket) => {
             socket.emit('new-user', true);
         } else {
             console.log('user should be created by now');
-            socket.emit('new-user', false);
+            socket.emit('successful-sign-on', true);
         }
     }
     socket.on('user', ((res, password) => {
         console.log('server side - user trying to connect');
-        console.log('user');
-        users(res, password, userExists);
+        users(res, userExists);
     }));
 
-    socket.on('new-user-attempt', (res, password) => {
-        newUsers(res, password, userExists);
+    socket.on('new-user-attempt', (res) => {
+        console.log('server: new user: ', res);
+        newUsers(res, userExists);
     })
 }))
 console.log('app running on port: ', PORT);
