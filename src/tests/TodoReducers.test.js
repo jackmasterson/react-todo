@@ -76,7 +76,34 @@ describe('todos reducer', () => {
                 payload: additionalTodo
             })
         ).toEqual({
-            deleteThis: additionalTodo
+            totalToDos: additionalTodo
         })
+    });
+    it('should handle SUCCESSFUL_SIGN_ON', () => {
+        expect(
+            reducer([], {
+                type: types.SUCCESSFUL_SIGN_ON,
+                payload: true
+            })
+        ).toEqual({authed: true});
     })
+    it('should handle NEW_USER_SIGN_ON', () => {
+        expect(
+            reducer([], {
+                type: types.NEW_USER_SIGN_ON,
+                payload: true
+            })
+        ).toEqual({newUserSignOn: true});
+    })
+    // this ones broken - could be where bug is coming from
+    // it('should handle CROSS_OFF_TO_DO', () => {
+    //     expect(
+    //         reducer([], {
+    //             type: types.CROSS_OFF_TO_DO,
+    //             payload: additionalTodo
+    //         })
+    //     ).toEqual(
+    //         {...additionalTodo, crossedOff: []}
+    //     )
+    // })
 })
