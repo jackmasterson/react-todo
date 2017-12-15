@@ -17,7 +17,6 @@ export const updated = (todo, edits, todos) => {
             todo.name = '';
         }
     }
-    console.log('updated todos: ', todos);
     return [...todos];
 }
 
@@ -26,7 +25,6 @@ export const deleteThis = (todo, todos) => {
     for (let doing of todos) {
         doing.name = '';
     }
-    console.log('todos: ', todos);
     return [...todos];
 }
 
@@ -44,8 +42,6 @@ export const select = (todo, todos) => {
     if (todo) {
         todo.name = 'selected';
     }
-    console.log('selected todos: ', todos);
-    console.log('selected todo: ', todo);
 }
 
 export const signIn = (user, password, callback) => {

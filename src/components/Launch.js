@@ -10,6 +10,8 @@ class Launch extends Component {
         let val = document.getElementById('input-to-do').value;
         updateToDo(val);
     }
+    // if the user has signed in, it renders the input, list items, and actions
+    // otherwise, it redirects them to sign in screen
     render() {
         if (sessionStorage.getItem('authed')) {
             return (

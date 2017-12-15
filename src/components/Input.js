@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {updateToDo} from '../reducers/action-reducer';
+import {updateToDo} from '../reducers/todo-reducer';
 
+// renders the Input component, where users put in their todos
+// also handles a change, updating the state with each keypress
 class Input extends Component {
     render() {
         return(

@@ -1,16 +1,21 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {requestSignIn} from '../reducers/action-reducer';
+import {requestSignIn} from '../reducers/todo-reducer';
 import Launch from './Launch';
 
 class SignIn extends Component {
+    // new user will be submitted with password and username;
+    // request sign in will be initialized
     submit(newUser) {
         let un = document.getElementById('username').value;
         let pw = document.getElementById('password').value;
         this.props.requestSignIn(un, pw, newUser);
     }
+    // if the user is authed, it will return the user to the Launch screen
+    // if the user is new, it will display the new user flow
+    // otherwise, it will render the initial log in screen
     render() {
-        if (this.props.actions.authed) {
+        if (this.props.todo.authed) {
             sessionStorage.setItem('authed', true);
             return (
                 <Launch />
