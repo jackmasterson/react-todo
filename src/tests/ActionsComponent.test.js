@@ -1,40 +1,33 @@
-import React from 'react';
+import React from 'react'
 import { mount, configure } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {Actions} from '../components/Actions';
+import { Actions } from '../components/Actions';
 
 configure({ adapter: new Adapter() });
 
-describe("Actions", () => {
-    let props;
-    let mountedActions;
-    const actionsComponent = () => {
-        if (!mountedActions) {
-            mountedActions = mount(
-                <Actions {...props} />
-            );
-        }
-        return mountedActions;
+function setup() {
+    const props = {
+        updateToDo: jest.fn(),
+        handleAction: jest.fn()
     }
 
-    beforeEach(() => {
-        props = {
-            handleAction: undefined,
-            updateTodo: undefined,
-        };
-        mountedActions = undefined;
-    });
-    
-    // All tests will go here
-    it("always renders a Button", () => {
-        const Button = actionsComponent().find("Button");
-        expect(Button.length).toBeGreaterThan(0);
-    });
-    describe("the rendered Button", () => {
-        it("contains everything else that gets rendered", () => {
-            const divs = actionsComponent().find("div");
-            expect(divs).toEqual(actionsComponent().children());
-        });
-    });
+    const enzymeWrapper = mount(<Actions {...props} />)
+    return {
+        props,
+        enzymeWrapper
+    }
+}
 
-});
+describe('components', () => {
+    describe('Actions', () => {
+        it('should render self and subcomponents', () => {
+            const { enzymeWrapper } = setup()
+            const buttons = enzymeWrapper.find('Button');
+            for (let button of buttons) {
+                expect(button.props.className === 'button');
+                expect(button.props.onClick === button.handleAction);
+            }
+
+        });
+    })
+})

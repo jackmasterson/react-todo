@@ -8,6 +8,7 @@ const server = app.listen(PORT);
 
 const users = require('./users');
 const newUsers = require('./newUsers');
+const saveToMongo = require('./saveToMongo');
 
 app.use(express.static(DIST_DIR));
 
@@ -27,6 +28,11 @@ io.on('connection', ((socket) => {
             socket.emit('successful-sign-on', true);
         }
     }
+
+    const saved = (status) => {
+        console.log('status of the save is: ', status);
+        socket.emit('saved', status);
+    }
     socket.on('user', ((res, password) => {
         console.log('server side - user trying to connect');
         users(res, userExists);
@@ -35,6 +41,11 @@ io.on('connection', ((socket) => {
     socket.on('new-user-attempt', (res) => {
         console.log('server: new user: ', res);
         newUsers(res, userExists);
+    });
+
+    socket.on('save', (res) => {
+        console.log('saving serverside: ', res);
+        saveToMongo(res, saved);
     })
 }))
 console.log('app running on port: ', PORT);

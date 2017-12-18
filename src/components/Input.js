@@ -4,7 +4,7 @@ import {updateToDo} from '../reducers/todo-reducer';
 
 // renders the Input component, where users put in their todos
 // also handles a change, updating the state with each keypress
-class Input extends Component {
+export class Input extends Component {
     render() {
         return(
             <input

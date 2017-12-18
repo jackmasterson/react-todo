@@ -6,7 +6,8 @@ import {
     turnEditingOn,
     addEdits,
     deleteToDo,
-    crossOffToDo
+    crossOffToDo,
+    saveToDatabase,
 } from '../reducers/todo-reducer';
 import {Button} from 'react-bootstrap';
 
@@ -52,6 +53,12 @@ export class Actions extends Component {
             }),
             style: 'success',
             key: 4,
+        }, {
+            type: 'SAVE',
+            key: 5,
+            run: (() => {
+                this.save();
+            })
         }];
     }
     // if there is a value in the input, and if we haven't selected
@@ -114,6 +121,9 @@ export class Actions extends Component {
         }
     }
 
+    save() {
+        this.props.saveToDatabase(this.props.todo.totalToDos, window.user);
+    }
     // renders the action buttons;
     // receives the handleAction prop which runs the action's corresponding
     // method;
@@ -143,6 +153,7 @@ export default connect(
         turnEditingOn, 
         addEdits, 
         deleteToDo, 
-        crossOffToDo
+        crossOffToDo,
+        saveToDatabase,
     }
 )(Actions);

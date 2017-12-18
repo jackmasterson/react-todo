@@ -7,6 +7,7 @@ import {
     select,
     signIn,
     newUser,
+    save,
 } from '../lib/todoServices';
 
 import * as TodoActions from '../actions/todo-actions';
@@ -79,7 +80,18 @@ export const requestSignIn = (user, password, userIsNew) => {
                 dispatch(TodoActions.successfulSignOn(false));
             }
         }
+        window.user = user;
         signIn(user, password, proceed);
+    }
+}
+
+export const saveToDatabase = (data, user) => {
+    return (dispatch) => {
+        const status = ((res) => {
+            console.log('made it here: ', res); 
+            dispatch(TodoActions.saveComplete(res));
+        })
+        save(data, user, status);
     }
 }
 
@@ -103,6 +115,8 @@ export default (state = initialTodos, action) => {
             return {...state, authed: action.payload}
         case Types.NEW_USER_SIGN_ON:
             return {...state, newUserSignOn: true}
+        case Types.SAVE_COMPLETE:
+            return {...state, saveComplete: action.payload}
         default:
             return {state, totalToDos: state};
     }

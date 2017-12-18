@@ -66,3 +66,14 @@ export const newUser = (user, password, callback) => {
         socket.emit('new-user-attempt', {user, password});
     });
 }
+
+export const save = (data, user, status) => {
+    const socket = io();
+    socket.open();
+    socket.on('connect', () => {
+        socket.emit('save', {data, user});
+    });
+    socket.on('saved', (res) => {
+        status(res);
+    })
+}
