@@ -8,6 +8,7 @@ import {
     signIn,
     newUser,
     save,
+    fetchToDos
 } from '../lib/todoServices';
 
 import * as TodoActions from '../actions/todo-actions';
@@ -81,6 +82,7 @@ export const requestSignIn = (user, password, userIsNew) => {
             }
         }
         window.user = user;
+        sessionStorage.setItem('user', user);
         signIn(user, password, proceed);
     }
 }
@@ -88,10 +90,18 @@ export const requestSignIn = (user, password, userIsNew) => {
 export const saveToDatabase = (data, user) => {
     return (dispatch) => {
         const status = ((res) => {
-            console.log('made it here: ', res); 
             dispatch(TodoActions.saveComplete(res));
         })
         save(data, user, status);
+    }
+}
+
+export const getToDos = () => {
+    return (dispatch) => {
+        const callback = (res) => {
+            dispatch(TodoActions.fetchedToDos(res));
+        }
+        fetchToDos(callback)
     }
 }
 
@@ -117,6 +127,8 @@ export default (state = initialTodos, action) => {
             return {...state, newUserSignOn: true}
         case Types.SAVE_COMPLETE:
             return {...state, saveComplete: action.payload}
+        case Types.FETCHED_TODOS:
+            return {...state, totalToDos: action.payload}
         default:
             return {state, totalToDos: state};
     }

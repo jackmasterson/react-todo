@@ -11,3 +11,4 @@ export const crossedOff = (val) => ({ type: Types.CROSS_OFF_TO_DO, payload: val 
 export const successfulSignOn = (val) => ({ type: Types.SUCCESSFUL_SIGN_ON, payload: val });
 export const newUserFlow = (val) => ({ type: Types.NEW_USER_SIGN_ON, payload: val });
 export const saveComplete = (val) => ({ type: Types.SAVE_COMPLETE, payload: val });
+export const fetchedToDos = (val) => ({ type: Types.FETCHED_TODOS, payload: val });

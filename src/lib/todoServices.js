@@ -77,3 +77,15 @@ export const save = (data, user, status) => {
         status(res);
     })
 }
+
+export const fetchToDos = (callback) => {
+    const socket = io();
+    socket.open();
+    socket.on('connect', () => {
+        socket.emit('fetching', sessionStorage.getItem('user'));
+    });
+    socket.on('fetched', (res) => {
+        console.log('res client side is: ', res);
+        callback(res);
+    })
+}

@@ -9,3 +9,4 @@ export const CROSS_OFF_TO_DO = 'CROSS_OFF_TO_DO';
 export const SUCCESSFUL_SIGN_ON = 'SUCCESSFUL_SIGN_ON';
 export const NEW_USER_SIGN_ON = 'NEW_USER_SIGN_ON';
 export const SAVE_COMPLETE = 'SAVE_COMPLETE';
+export const FETCHED_TODOS = 'FETCHED_TODOS';

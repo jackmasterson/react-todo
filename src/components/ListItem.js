@@ -1,8 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {toDoSelected} from '../reducers/todo-reducer';
+import {toDoSelected, getToDos} from '../reducers/todo-reducer';
 
 class ListItem extends Component {
+    componentWillMount() {
+        this.props.getToDos();
+    }
     // when a list item is clicked, it will update the state to 
     // mark itself selected
     onSelect(val) {
@@ -35,5 +38,5 @@ class ListItem extends Component {
 
 export default connect(
     (state) => (state),
-    {toDoSelected}
+    {toDoSelected, getToDos}
 )(ListItem);

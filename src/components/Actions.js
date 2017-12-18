@@ -122,7 +122,7 @@ export class Actions extends Component {
     }
 
     save() {
-        this.props.saveToDatabase(this.props.todo.totalToDos, window.user);
+        this.props.saveToDatabase(this.props.todo.totalToDos, sessionStorage.getItem('user'));
     }
     // renders the action buttons;
     // receives the handleAction prop which runs the action's corresponding
